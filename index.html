@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Quentin Marinho</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <meta name="description" content="Portfolio de Quentin Marinho, Ingénieur Calcul. Découvrez mes projets en éléments finis, dynamique des structures et modélisation.">
+    <meta property="og:title" content="Portfolio | Quentin Marinho">
+    <meta property="og:description" content="Ingénieur Calcul - Airbus Atlantic & Master MAM. Mes projets de simulation.">
+    <meta property="og:image" content="images/thumb-airbus.jpg">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #f5f5f7; 
+            --text-main: hsl(240, 95%, 9%); 
+            --text-muted: #666666; 
+            --card-bg: hsl(240, 95%, 9%); 
+            --card-text: #ffffff; 
+            --card-muted: #aaaaaa; 
+            --border-color: rgba(0, 0, 0, 0.1); 
+            --accent: #64748b; 
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: "Inter", sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 0; overflow-x: hidden; }
+        .pixel-font { font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* ----- NAVIGATION ----- */
+        .nav-wrapper { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; align-items: center; }
+        
+        .nav-toggle-btn { display: none; background: var(--text-main); color: #fff; border: none; padding: 12px 28px; border-radius: 50px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.2); align-items: center; gap: 8px; transition: transform 0.2s ease; }
+        .nav-toggle-btn:active { transform: scale(0.95); }
+
+        nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px rgba(0,0,0,0.1); padding: 8px 12px; border-radius: 100px; display: flex; gap: 4px; justify-content: center; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 10px; font-weight: 600; padding: 10px 14px; border-radius: 100px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+        nav a i { font-size: 12px; opacity: 0.7; }
+        nav a:hover { background: rgba(0,0,0,0.05); color: var(--text-main); transform: translateY(-2px); }
+        nav a.actif { color: #fff; background-color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* ----- SECTIONS & HERO ----- */
+        .section-page { display: block; padding: 8rem 5vw; max-width: 1400px; margin: 0 auto; }
+        header { padding: 12vh 5vw 5vh; max-width: 1400px; margin: 0 auto; opacity: 0; animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Header avec Photo */
+        .hero-header { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 4rem; padding: 0 !important; }
+        .profile-pic-wrapper { width: clamp(120px, 15vw, 160px); height: clamp(120px, 15vw, 160px); border-radius: 50%; overflow: hidden; opacity: 1; filter: grayscale(0%); transition: all 0.5s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .profile-pic-wrapper.scrolled, .profile-pic-wrapper:hover { opacity: 0.75; filter: grayscale(100%); transform: scale(0.95); }
+        .profile-pic-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+        h1.massive-title { font-size: clamp(4rem, 12vw, 9rem); line-height: 0.85; font-weight: 800; margin: 0 0 20px; text-transform: uppercase; letter-spacing: -0.04em; }
+        .hero-subtitle { font-size: clamp(1.2rem, 3vw, 2.5rem); margin-bottom: 0px; color: var(--text-muted); }
+        h2.section-title { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; font-weight: 800; margin-bottom: 3rem; text-transform: uppercase; letter-spacing: -0.02em; }
+        .large-text { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.3; color: var(--text-muted); max-width: 1000px; }
+        .large-text span { color: var(--text-main); font-weight: 800; }
+
+        /* ----- CARTES EXPÉRIENCES (NOUVELLE MÉTHODE IMAGE CORRIGÉE) ----- */
+        .grid-arches { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        
+        .arch-card { background-color: var(--card-bg); color: var(--card-text); border-radius: 180px 180px 40px 40px; padding: 5rem 3rem 3rem; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; min-height: 420px; position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(255,255,255,0.05); }
+        
+        .arch-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 0; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        /* On applique le dégradé UNIQUEMENT si ce n'est PAS une carte de contact */
+        .arch-card:not(.contact-card)::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)); 
+            z-index: 1; 
+            transition: background 0.5s ease; 
+            pointer-events: none; 
+        }
+
+        /* Effet au survol uniquement pour les cartes d'expérience */
+        .arch-card:not(.contact-card):hover::before { 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); 
+        }
+        
+        /* Isolation du contenu pour éviter de casser le bouton absolute */
+        .arch-content { z-index: 2; position: relative; } 
+        
+        .arch-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
+        .arch-card:hover .arch-bg { transform: scale(1.05); }
+        
+        
+        .arch-tag { font-size: 2.5rem; margin-top: auto; margin-bottom: 20px; color: rgba(255,255,255,0.7); }
+        .arch-title { font-size: 1.6rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
+        
+        /* Bouton forcé en z-index 2 pour rester au dessus de tout */
+        .explore-btn { position: absolute; bottom: 3rem; left: 50%; transform: translate(-50%, 40px); opacity: 0; background: #fff; color: var(--text-main); padding: 12px 32px; border-radius: 50px; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2; }
+        
+        .arch-card:hover .explore-btn,
+        .arch-card.active-scroll .explore-btn { opacity: 1; transform: translate(-50%, 0); }
+
+        /* ----- PROJETS & FORMATIONS LISTE ----- */
+        .project-category-title { font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin: 5rem 0 2rem 0; color: var(--accent); letter-spacing: 2px; }
+        .list-item { border-top: 1px solid var(--border-color); padding: 2.5rem 0; display: flex; flex-direction: row; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; transition: all 0.3s ease; position: relative; }
+        .list-item-content { flex: 1; padding-right: 2rem; }
+        .project-thumbnail { width: 180px; height: 110px; min-width: 180px; border-radius: 15px; background-size: cover; background-position: center; background-color: #ddd; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .list-item:not(.formation-item):hover { padding-left: 20px; background: rgba(0,0,0,0.02); }
+        .list-item:not(.formation-item):hover .project-thumbnail { transform: scale(1.05) rotate(2deg); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .list-item:last-child { border-bottom: 1px solid var(--border-color); }
+
+        .explore-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; color: var(--accent); transition: all 0.3s ease; }
+        .list-item:hover .explore-link { transform: translateX(8px); color: var(--text-main); }
+
+        /* Formations & Formula Student (Dropdown) */
+        .list-item.formation-item { flex-direction: column; align-items: flex-start; }
+        .formation-header { display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; }
+        .formation-logo { height: 60px; width: auto; max-width: 200px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); margin-right: 1.5rem; }
+        .formation-details { display: grid; grid-template-rows: 0fr; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; width: 100%; }
+        .formation-details-inner { overflow: hidden; font-size: 1rem; color: var(--text-main); line-height: 1.6; padding-top: 0; border-left: 3px solid var(--accent); padding-left: 0; margin-left: 0; transition: all 0.5s ease; }
+        
+        .list-item.formation-item:hover .formation-logo,
+        .list-item.formation-item.active-scroll .formation-logo { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
+        .list-item.formation-item:hover .formation-details,
+        .list-item.formation-item.active-scroll .formation-details { grid-template-rows: 1fr; opacity: 1; }
+        .list-item.formation-item:hover .formation-details-inner,
+        .list-item.formation-item.active-scroll .formation-details-inner { padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1.5rem; margin-top: 1.5rem; }
+
+        /* ----- SKILLS & LANGUES GRID ----- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; align-items: start; }
+        .skill-box { background: #fff; padding: 2.5rem 2rem; border-radius: 35px; border: 1px solid var(--border-color); transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); cursor: default; }
+        .skill-box i { font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block; }
+        .skill-box h3 { margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .skill-list { list-style: none; padding: 0; margin: 0; font-weight: 700; font-size: 1.15rem; line-height: 1.4; }
+        .skill-details { display: grid; grid-template-rows: 0fr; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; }
+        .skill-details-inner { overflow: hidden; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; padding-top: 0; transition: padding 0.5s ease; }
+        
+        .skill-box:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .skill-box:hover .skill-details { grid-template-rows: 1fr; opacity: 1; }
+        .skill-box:hover .skill-details-inner { padding-top: 1.2rem; }
+        
+        .skill-box.active-scroll { box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .skill-box.active-scroll .skill-details { grid-template-rows: 1fr; opacity: 1; }
+        .skill-box.active-scroll .skill-details-inner { padding-top: 1.2rem; }
+
+        /* ----- INTÉRÊTS & CARTE ----- */
+        .interets-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+        .travel-map-wrapper { position: relative; width: 100%; aspect-ratio: 1.35; overflow: hidden; border-radius: 35px; background: #fff; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .travel-map { position: absolute; width: 165%; height: auto; aspect-ratio: 1.97; top: 2%; left: -42%; background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg'); background-size: 100% 100%; opacity: 0.6; }
+        .pin { position: absolute; width: 10px; height: 10px; background-color: var(--accent); border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; animation: pulse-pin 2s infinite; z-index: 10; }
+        @keyframes pulse-pin { 0% { box-shadow: 0 0 0 0 rgba(100, 116, 139, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(100, 116, 139, 0); } 100% { box-shadow: 0 0 0 0 rgba(100, 116, 139, 0); } }
+        .pin .tooltip { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--text-main); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; opacity: 0; visibility: hidden; transition: all 0.3s ease; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.2); pointer-events: none; z-index: 20; }
+        .pin:hover .tooltip { opacity: 1; visibility: visible; bottom: 22px; }
+        .pin .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: var(--text-main) transparent transparent transparent; }
+
+        /* ----- BOUTONS DE CONTACT ----- */
+        .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .contact-btn { background: #fff; color: var(--text-main); padding: 15px 30px; text-decoration: none; font-weight: 800; border-radius: 50px; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; align-items: center; gap: 12px; }
+        .contact-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .contact-btn i { font-size: 1.2rem; }
+
+        @media (max-width: 900px) { .interets-grid { grid-template-columns: 1fr; gap: 2rem; } }
+        
+        /* RESPONSIVE SMARTPHONE - MENU DÉROULANT & VIGNETTES */
+        @media (max-width: 768px) { 
+            .nav-wrapper { bottom: 20px; width: 90%; }
+            .nav-toggle-btn { display: flex; z-index: 10001; }
+            
+            nav { flex-direction: column; position: absolute; bottom: 60px; width: 100%; border-radius: 25px; padding: 15px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 15px 40px rgba(0,0,0,0.2); transform: translateY(20px); opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+            nav.menu-open { transform: translateY(0); opacity: 1; visibility: visible; }
+            nav a { padding: 15px 20px; font-size: 13px; justify-content: flex-start; border-radius: 15px; }
+            nav a span { display: inline; } 
+            
+            .section-page { padding: 4rem 5vw; } 
+            .hero-header { justify-content: center; text-align: center; gap: 1.5rem; }
+            .profile-pic-wrapper { margin-top: 1rem; }
+            
+            .arch-card { min-height: 380px; padding: 4rem 2rem 2rem; }
+            
+            .project-thumbnail { width: 90px; height: 65px; min-width: 90px; border-radius: 10px; }
+            .list-item-content { padding-right: 1rem; }
+            .list-item .arch-title { font-size: 1.4rem !important; }
+            
+            .formation-logo { height: 40px; margin-right: 1rem; } 
+            .travel-map-wrapper { aspect-ratio: 1.1; } 
+            .travel-map { width: 210%; left: -63%; top: 5%; } 
+            
+            .contact-btn { width: 100%; justify-content: center; } 
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="nav-wrapper">
+        <nav id="nav-menu">
+            <a href="#moi" class="nav-link actif"><i class="fa-solid fa-user"></i><span>Moi</span></a>
+            <a href="#experience" class="nav-link"><i class="fa-solid fa-briefcase"></i><span>Expérience</span></a>
+            <a href="#projets" class="nav-link"><i class="fa-solid fa-gears"></i><span>Projets</span></a>
+            <a href="#formations" class="nav-link"><i class="fa-solid fa-graduation-cap"></i><span>Études</span></a>
+            <a href="#competences" class="nav-link"><i class="fa-solid fa-laptop-code"></i><span>Skills</span></a>
+            <a href="#langues" class="nav-link"><i class="fa-solid fa-language"></i><span>Langues</span></a>
+            <a href="#interets" class="nav-link"><i class="fa-solid fa-heart"></i><span>Loisirs</span></a>
+            <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </nav>
+        <button class="nav-toggle-btn" id="nav-toggle">
+            <i class="fa-solid fa-bars"></i> Menu
+        </button>
+    </div>
+
+    <section id="moi" class="section-page">
+        <header class="hero-header">
+            <div>
+                <h1 class="massive-title">QUENTIN<br>MARINHO</h1>
+                <div class="hero-subtitle pixel-font">INGÉNIEUR CALCUL JUNIOR</div>
+            </div>
+            <div class="profile-pic-wrapper">
+                <img src="images/photo-profil.jpg" alt="Photo de Quentin Marinho">
+            </div>
+        </header>
+        <p class="large-text">
+            Spécialisé en <span>mécanique des structures</span>, je mets la simulation numérique au service de l'innovation industrielle. De mon alternance en calcul dynamique chez <span>Airbus Atlantic</span> à l'analyse de phénomènes non-linéaires, je m'appuie sur la modélisation pour concevoir des <span>structures fiables et optimisées</span>.
+        </p>
+    </section>
+
+    <section id="experience" class="section-page">
+        <h2 class="section-title">Expérience</h2>
+        <div class="grid-arches">
+            
+            <a href="page-alternance.html" class="arch-card">
+                <div class="arch-bg" style="background-image: url('images/thumb-airbus.jpg');"></div>
+                <div class="arch-content" style="margin-top: -2rem;">
+                    <div class="pixel-font arch-tag">ALTERNANCE</div>
+                    <div class="arch-title">Airbus Atlantic</div>
+                    <p class="arch-desc" style="color: #ddd">Apprenti Ingénieur Calcul Dynamique • Rochefort</p>
+                </div>
+                <div class="explore-btn">Explorer →</div>
+            </a>
+
+            <a href="page-stage.html" class="arch-card">
+                <div class="arch-bg" style="background-image: url('images/thumb-lemta.jpg');"></div>
+                <div class="arch-content" style="margin-top: -2rem;">
+                    <div class="pixel-font arch-tag">STAGE</div>
+                    <div class="arch-title">LEMTA / CNRS</div>
+                    <p class="arch-desc" style="color: #ddd">Stage en Laboratoire • Nancy</p>
+                </div>
+                <div class="explore-btn">Explorer →</div>
+            </a>
+            
+        </div>
+    </section>
+
+    <section id="projets" class="section-page">
+        <h2 class="section-title">Projets</h2>
+
+        <div class="project-category-title">Master 2 MAM</div>
+        <a href="projet-plastification.html" class="list-item">
+            <div class="list-item-content">
+                <div class="pixel-font" style="margin-bottom: 5px; color: var(--text-muted);">Simulation Non-Linéaire</div>
+                <div class="arch-title" style="font-size: 2rem; color: var(--text-main);">Analyse Élasto-Plastique de Treillis</div>
+                <p style="color: var(--text-muted); margin-top: 10px;">Calcul de ruine théorique et simulation Code_Aster.</p>
+                <div class="explore-link">Explorer <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="project-thumbnail" style="background-image: url('images/thumb-treillis.jpg');"></div>
+        </a>
+        <a href="projet-vis.html" class="list-item">
+            <div class="list-item-content">
+                <div class="pixel-font" style="margin-bottom: 5px; color: var(--text-muted);">Éléments Finis</div>
+                <div class="arch-title" style="font-size: 2rem; color: var(--text-main);">Dimensionnement d'Assemblage Vissé</div>
+                <p style="color: var(--text-muted); margin-top: 10px;">Analyse locale Patran/Nastran et corrélation analytique.</p>
+                <div class="explore-link">Explorer <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="project-thumbnail" style="background-image: url('images/thumb-vis.jpg');"></div>
+        </a>
+
+        <div class="project-category-title">Master 1 Mécanique</div>
+        <a href="projet-arcs.html" class="list-item">
+            <div class="list-item-content">
+                <div class="pixel-font" style="margin-bottom: 5px; color: var(--text-muted);">Biomécanique & Histoire</div>
+                <div class="arch-title" style="font-size: 2rem; color: var(--text-main);">Arcs Composites Antiques</div>
+                <p style="color: var(--text-muted); margin-top: 10px;">Essais de traction dynamique au LBMC et simulation VirtualBow.</p>
+                <div class="explore-link">Explorer <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="project-thumbnail" style="background-image: url('images/thumb-arcs.jpg');"></div>
+        </a>
+        <a href="projet-vibration.html" class="list-item">
+            <div class="list-item-content">
+                <div class="pixel-font" style="margin-bottom: 5px; color: var(--text-muted);">Dynamique des Structures</div>
+                <div class="arch-title" style="font-size: 2rem; color: var(--text-main);">Analyse Vibratoire d'une Aile</div>
+                <p style="color: var(--text-muted); margin-top: 10px;">Modélisation flexion/torsion à 2 DDL sous balourd.</p>
+                <div class="explore-link">Explorer <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="project-thumbnail" style="background-image: url('images/thumb-vibration.jpg');"></div>
+        </a>
+
+        <div class="project-category-title">Personnel / Pratiques</div>
+        
+        <div class="list-item formation-item">
+            <div class="formation-header">
+                <div class="list-item-content">
+                    <div class="pixel-font" style="margin-bottom: 5px; color: var(--accent);">Compétition Automobile</div>
+                    <div class="arch-title" style="font-size: 2rem; color: var(--text-main);">Formula Student</div>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Support en simulation numérique et analyse réglementaire.</p>
+                </div>
+                <img src="images/thumb-formula.jpg" alt="Formula Student" class="formation-logo" style="border-radius: 12px; object-fit: cover; width: 150px; height: 90px; margin-right: 0;">
+            </div>
+            <div class="formation-details">
+                <div class="formation-details-inner">
+                    <strong>Rôle :</strong> Ayant intégré le projet en cours d'année, je me suis rapidement concentré sur l'étude approfondie et la vérification des normes drastiques de la compétition. Je suis également intervenu en tant que <strong>support en simulation numérique</strong> (calculs de structures) pour aider les autres membres de l'équipe à valider et optimiser leurs pièces mécaniques avant fabrication.
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section id="formations" class="section-page">
+        <h2 class="section-title">Formations</h2>
+        <div class="list-item formation-item">
+            <div class="formation-header">
+                <div class="list-item-content">
+                    <div class="pixel-font" style="color: var(--accent);">2024 - 2026</div>
+                    <div class="arch-title" style="font-size: 1.8rem;">Master MAM</div>
+                    <p style="color: var(--text-muted);">Modélisation Appliquée à la Mécanique • Lyon 1</p>
+                </div>
+                <img src="images/logo-lyon1.png" alt="Logo Université Lyon 1" class="formation-logo">
+            </div>
+            <div class="formation-details">
+                <div class="formation-details-inner">
+                    <strong>Spécialisation :</strong> Calcul de structures, éléments finis (EF), dynamique non-linéaire et optimisation numérique, mécanique des fluides, CAO. Utilisation de logiciels industriels.
+                </div>
+            </div>
+        </div>
+        <div class="list-item formation-item">
+            <div class="formation-header">
+                <div class="list-item-content">
+                    <div class="pixel-font" style="color: var(--accent);">2020 - 2024</div>
+                    <div class="arch-title" style="font-size: 1.8rem;">Licence Physique</div>
+                    <p style="color: var(--text-muted);">Mécanique des Fluides et Énergie • Nancy</p>
+                </div>
+                <img src="images/logo-lorraine.png" alt="Logo Université de Lorraine" class="formation-logo">
+            </div>
+            <div class="formation-details">
+                <div class="formation-details-inner">
+                    <strong>Enseignements clés :</strong> Bases solides en mécanique des milieux continus, thermodynamique fondamentale, mathématiques, électromagnétisme et également de la chimie dû à mes 2 premières années en Licence Physique-Chimie.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences" class="section-page">
+        <h2 class="section-title">Compétences Technique</h2>
+        
+        
+
+        <div class="skills-grid">
+            
+            <div class="skill-box">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Dynamique Rapide</h3>
+                <ul class="skill-list"><li>HyperWorks / Radioss</li></ul>
+                <div class="skill-details">
+                    <div class="skill-details-inner">
+                        <strong>Niveau : Industriel (Quotidien)</strong><br>
+                        Utilisation intensive chez <span>Airbus Atlantic</span> pour le calcul de crash, impacts et tenue dynamique des structures aéronautiques.
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <i class="fa-solid fa-cube"></i>
+                <h3>Statique, Cinématique & EF</h3>
+                <ul class="skill-list"><li>Abaqus, Code_Aster, Patran/Nastran, Adams</li></ul>
+                <div class="skill-details">
+                    <div class="skill-details-inner">
+                        <strong>Niveau : Avancé</strong><br>
+                        Pratique poussée lors de projets académiques et TP. Dimensionnement de structures, modélisation non-linéaire et analyse cinématique (Salome-Meca, Adams).
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <i class="fa-solid fa-droplet"></i>
+                <h3>Mécanique des Fluides</h3>
+                <ul class="skill-list"><li>Ansys Fluent, COMSOL, OpenFOAM</li></ul>
+                <div class="skill-details">
+                    <div class="skill-details-inner">
+                        <strong>Niveau : Bon niveau (Master / Projets)</strong><br>
+                        Pratique régulière en TP et projets universitaires. Simulations CFD, modélisation d'écoulements et études de transferts thermiques.
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <i class="fa-solid fa-drafting-compass"></i>
+                <h3>Conception / CAO</h3>
+                <ul class="skill-list"><li>SolidWorks, CATIA</li></ul>
+                <div class="skill-details">
+                    <div class="skill-details-inner">
+                        <strong>Niveau : Avancé</strong><br>
+                        Excellente maîtrise de la modélisation de pièces 3D complexes, gestion d'assemblages paramétriques et mise en plan pour la fabrication.
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <i class="fa-solid fa-code"></i>
+                <h3>Scripting & Programmation</h3>
+                <ul class="skill-list"><li>Python, MATLAB, Tcl / HWC</li></ul>
+                <div class="skill-details">
+                    <div class="skill-details-inner">
+                        <strong>Niveau : Usage Quotidien</strong><br>
+                        Développement de scripts d'automatisation de calcul chez <span>Airbus</span> et programmation pour le post-traitement de données.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="langues" class="section-page">
+        <h2 class="section-title">Langues</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <i class="fa-solid fa-flag"></i>
+                <h3>Français</h3>
+                <p class="skill-list">Maternel</p>
+                <div class="skill-details"><div class="skill-details-inner">Langue d'usage quotidien et professionnel.</div></div>
+            </div>
+            <div class="skill-box">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h3>Anglais</h3>
+                <p class="skill-list">B2 • Intermédiaire</p>
+                <div class="skill-details"><div class="skill-details-inner">Compréhension technique, rédaction de rapports et réunions.</div></div>
+            </div>
+            <div class="skill-box">
+                <i class="fa-solid fa-comment"></i>
+                <h3>Allemand</h3>
+                <p class="skill-list">Scolaire</p>
+                <div class="skill-details"><div class="skill-details-inner">Bases acquises lors du parcours scolaire.</div></div>
+            </div>
+            <div class="skill-box">
+                <i class="fa-solid fa-sun"></i>
+                <h3>Portugais</h3>
+                <p class="skill-list">Débutant</p>
+                <div class="skill-details"><div class="skill-details-inner">Pratique familiale, compréhension orale de base.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interets" class="section-page">
+        <div class="interets-grid">
+            <div>
+                <h2 class="section-title" style="margin-bottom: 2rem;">Intérêts</h2>
+                <p class="large-text" style="font-size: clamp(1.2rem, 2vw, 1.8rem); max-width: 100%;">
+                    Passionné par l'ingénierie automobile et la <span>Formule 1</span>.<br><br>
+                    Côté sport, j'ai pratiqué 10 ans de <span>Natation</span> en club et 7 ans de <span>Tennis</span>. J'aime également profiter de mon temps libre pour faire de la <span>randonnée et du VTT</span> entre amis.<br><br>
+                    J'apprécie la découverte de nouvelles cultures avec de nombreux <span>voyages</span> à travers le monde.
+                </p>
+            </div>
+            <div class="travel-map-wrapper">
+                <div class="travel-map">
+                    <div class="pin" style="top: 26.0%; left: 45.0%;"><span class="tooltip">Portugal (x25)</span></div>
+                    <div class="pin" style="top: 24.8%; left: 46.1%;"><span class="tooltip">Espagne</span></div>
+                    <div class="pin" style="top: 22.5%; left: 47.2%;"><span class="tooltip">France</span></div>
+                    <div class="pin" style="top: 19.8%; left: 47.9%;"><span class="tooltip">Belgique</span></div>
+                    <div class="pin" style="top: 20.8%; left: 48.6%;"><span class="tooltip">Luxembourg</span></div>
+                    <div class="pin" style="top: 19.5%; left: 49.6%;"><span class="tooltip">Allemagne</span></div>
+                    <div class="pin" style="top: 22.2%; left: 49.1%;"><span class="tooltip">Suisse</span></div>
+                    <div class="pin" style="top: 25.0%; left: 50.5%;"><span class="tooltip">Italie</span></div>
+                    <div class="pin" style="top: 24.5%; left: 52.0%;"><span class="tooltip">Croatie</span></div>
+                    <div class="pin" style="top: 46.6%; left: 72.7%;"><span class="tooltip">Malaisie</span></div>
+                    <div class="pin" style="top: 48.4%; left: 73.3%;"><span class="tooltip">Singapour</span></div>
+                    <div class="pin" style="top: 53.5%; left: 75.0%;"><span class="tooltip">Indonésie</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-page">
+        <div class="arch-card contact-card" style="border-radius: 60px; min-height: auto; padding: 6rem 2rem; width:100%; box-sizing: border-box; background: var(--card-bg);">
+            <div class="pixel-font" style="font-size: 1.5rem; color: rgba(255,255,255,0.7);">PRÊT POUR LE CALCUL ?</div>
+            <div class="arch-title" style="font-size: clamp(2rem, 8vw, 5rem); margin-bottom: 2rem; color: #fff;">Travaillons ensemble.</div>
+            
+            <div class="contact-links">
+                <a href="tel:+33621176377" class="contact-btn">
+                    <i class="fa-solid fa-phone"></i> 06 21 17 63 77
+                </a>
+                
+                <a href="mailto:quentin.marinho22@gmail.com" class="contact-btn">
+                    <i class="fa-solid fa-envelope"></i> E-mail
+                </a>
+                
+                <a href="https://www.linkedin.com/in/quentin-marinho-b7280129b" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                
+                <a href="CV_Quentin_Marinho.pdf" target="_blank" class="contact-btn">
+                    <i class="fa-solid fa-file-pdf"></i> Mon CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 1. Gestion de l'état actif des liens au scroll
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+            const sections = document.querySelectorAll('.section-page');
+            const navLinks = document.querySelectorAll('.nav-link');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) currentSection = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('actif');
+                if (link.getAttribute('href') === `#${currentSection}`) link.classList.add('actif');
+            });
+        });
+        window.dispatchEvent(new Event('scroll'));
+
+        // 2. Gestion du Menu Mobile
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinksList = document.querySelectorAll('.nav-link');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('menu-open');
+            const icon = navToggle.querySelector('i');
+            if(navMenu.classList.contains('menu-open')) {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('menu-open');
+                    navToggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+        });
+
+        // 3. Auto-ouverture au scroll sur mobile + Effet N&B pour la photo de profil
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (window.innerWidth <= 768) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active-scroll');
+                    } else {
+                        entry.target.classList.remove('active-scroll');
+                    }
+                }
+            });
+        }, { 
+            threshold: 0, 
+            rootMargin: "-35% 0px -35% 0px" 
+        });
+
+        // On observe les formations, les skills, ET les arch-cards
+        document.querySelectorAll('.formation-item, .skill-box, .arch-card').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // EFFET PHOTO DE PROFIL AU SCROLL
+        window.addEventListener('scroll', () => {
+            const profilePic = document.querySelector('.profile-pic-wrapper');
+            if (window.scrollY > 50) {
+                profilePic.classList.add('scrolled');
+            } else {
+                profilePic.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

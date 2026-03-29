@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcs Antiques | Quentin Marinho</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { --bg-main: #f5f5f7; --text-main: hsl(240, 95%, 9%); --text-muted: #666666; --card-bg: #ffffff; --border-color: rgba(0, 0, 0, 0.1); --accent: #64748b; }
+        html { scroll-behavior: smooth; }
+        body { font-family: "Inter", sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 0; line-height: 1.6; }
+        .pixel-font { font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; }
+        .back-nav { padding: 2rem 5vw; max-width: 1000px; margin: 0 auto; }
+        .back-nav a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.3s ease; text-transform: uppercase; }
+        .back-nav a:hover { transform: translateX(-5px); color: var(--accent); }
+        .project-header { padding: 4rem 5vw 2rem; max-width: 1000px; margin: 0 auto; }
+        .project-tag { color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem; }
+        .project-title { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1; margin: 0 0 1.5rem; text-transform: uppercase; letter-spacing: -0.02em; }
+        .project-subtitle { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; }
+        .project-meta { display: flex; gap: 3rem; flex-wrap: wrap; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .meta-item h4 { margin: 0 0 0.5rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        .meta-item p { margin: 0; font-weight: 600; color: var(--text-main); }
+        
+        .project-content { padding: 4rem 5vw; max-width: 1000px; margin: 0 auto; }
+        .project-content h2 { font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem; text-transform: uppercase; color: var(--text-main); }
+        .project-content h3 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 1rem; color: var(--text-main); }
+        .project-content p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 850px; }
+        .project-content ul { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 850px; line-height: 1.8; }
+        .project-content strong { color: var(--text-main); }
+        
+        /* REDUIRE LA TAILLE DES IMAGES DANS LES PROJETS */
+        .project-content img {
+            max-width: 65%;
+            height: auto;
+            display: block;
+            margin: 3rem auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .conclusion-box { background: var(--text-main); color: #fff; padding: 3rem; border-radius: 30px; margin-top: 4rem; }
+        .conclusion-box h2 { color: #fff; margin-top: 0; border-bottom: none; }
+        .conclusion-box p { color: rgba(255,255,255,0.8); }
+        .conclusion-box strong { color: #fff; }
+
+        /* BOUTON PDF */
+        .pdf-btn-container { text-align: center; margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); }
+        .pdf-btn { background: var(--text-main); color: #fff; padding: 16px 40px; text-decoration: none; font-weight: 800; border-radius: 50px; text-transform: uppercase; font-size: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 12px; }
+        .pdf-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); background: var(--accent); }
+
+        @media (max-width: 768px) { 
+            .project-meta { gap: 1.5rem; flex-direction: column; } 
+            .conclusion-box { padding: 2rem; } 
+            .project-content img { max-width: 100%; } /* Images repassent à 100% sur mobile */
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav"><a href="index.html#projets"><i class="fa-solid fa-arrow-left"></i> Retour au portfolio</a></div>
+    <header class="project-header">
+        <div class="pixel-font project-tag">BIOMÉCANIQUE & HISTOIRE</div>
+        <h1 class="project-title">Arcs Composites Antiques</h1>
+        <p class="project-subtitle">Évaluation biomécanique d'arbalètes géantes : d'une campagne de caractérisation expérimentale (LBMC) à la modélisation numérique.</p>
+        <div class="project-meta">
+            <div class="meta-item"><h4>Cadre</h4><p>Projet TER (Master 1) / LBMC</p></div>
+            <div class="meta-item"><h4>Domaine</h4><p>Mécanique des matériaux, Simulation</p></div>
+            <div class="meta-item"><h4>Outils</h4><p>Machine Instron, VirtualBow</p></div>
+        </div>
+    </header>
+
+    <main class="project-content">
+        <h2>Le Contexte Historique & Problématique</h2>
+        <p>
+            Au IIIe siècle av. J.-C., le grec Biton a rédigé le <em>Traité des machines de guerre</em> dans lequel il décrit des arbalètes géantes d'une conception complexe. Ces armes, qu'il s'agisse de gastraphètes (armés à l'aide du poids du corps) ou de lithobolos (armés via un treuil), reposaient sur l'utilisation d'un arc composite formé de bois, de corne et de tendons d'animaux.
+        </p>
+        <p>
+            Ce projet semestriel, mené en collaboration avec des historiens au Laboratoire de Biomécanique et Mécanique des Chocs (LBMC), visait à répondre à une question d'ingénierie inversée : <strong>S'agit-il d'une ingénierie fonctionnelle et réaliste, ou bien d'ingénierie de papier destinée à la propagande militaire ?</strong>
+        </p>
+
+        <img src="images/arcs-traction.jpg" alt="Essais de caractérisation expérimentale sur machine de traction">
+
+        <h2>Campagne d'Essais & Caractérisation</h2>
+        <p>
+            Pour modéliser l'arc, il nous fallait connaître le comportement mécanique exact du "backing" (le dos de l'arc), décrit dans les textes antiques comme un mélange de fibres de collagène (tendons) et de colle animale. Nous avons donc recréé ces matériaux en laboratoire.
+        </p>
+        <h3>Protocole et Résultats Expérimentaux</h3>
+        <p>Nous avons fabriqué et testé sur une machine de traction (Instron) des éprouvettes sous trois formes : fibres de collagène pures, colle d'os seule, et le composite fini. Les essais ont révélé les comportements suivants :</p>
+        <ul>
+            <li><strong>Colle d'os :</strong> Matériau fragile et rigide, avec un module d'Young moyen $E_{colle} = 1.74$ GPa.</li>
+            <li><strong>Fibres de collagène :</strong> Matériau résistant et très rigide, avec $E_{fibres} \approx 41.4$ GPa.</li>
+            <li><strong>Composite (Tendons + Colle) :</strong> L'ajout de colle réduit l'élasticité naturelle du tendon mais assure la cohésion structurelle. Nous avons déterminé un module de <strong>$E_{comp} = 2.36$ GPa</strong>.</li>
+        </ul>
+
+        <h2>Modélisation des 4 Arcs sous VirtualBow</h2>
+        <p>
+            Forts de ces données expérimentales couplées aux données de la littérature (Bois de frêne à $12.3$ GPa et Corne à $3$ GPa), nous avons modélisé les arcs sous le logiciel <strong>VirtualBow</strong>.
+        </p>
+        <p>
+            L'étude s'est portée sur l'analyse comparative des <strong>4 modèles d'arcs</strong> décrits par Biton : les gastraphètes de Zopyros à Milet (ZMil) et à Cumes (ZCum), ainsi que les lithobolos de Charon de Magnésie (CMag) et d'Isidore d'Abydos (IAby).
+        </p>
+        <p>
+            Le profil multicouche a été scrupuleusement respecté selon la disposition optimale des matériaux : dos en collagène (50% de l'épaisseur), âme en bois (11%) et ventre en corne (39%).
+        </p>
+
+        <img src="images/arcs-virtualbow.jpg" alt="Modélisation multicouche de l'arc (Collagène, Bois, Corne)">
+
+        <h3>Analyse des Contraintes</h3>
+        <p>
+            Les simulations ont révélé des contraintes catastrophiques lors de la phase d'armement :
+        </p>
+        <ul>
+            <li><strong>Pour 3 des 4 arcs (ZMil, ZCum, IAby) :</strong> Les contraintes maximales générées dans les branches dépassent très largement le <strong>module de rupture</strong> du bois et de la corne. Dans la réalité, ces trois armes se briseraient instantanément au moment de les armer.</li>
+            <li><strong>Pour le 4ème arc (le modèle CMag extrapolé par Marsden) :</strong> Soumis à une force de 6000 N, les contraintes n'atteignent pas la rupture immédiate de l'arme entière, mais elles dépassent la <strong>limite élastique</strong> des matériaux (ex: 111 MPa atteints dans le bois).</li>
+        </ul>
+
+        <img src="images/arcs-graph.jpg" alt="Graphique comparatif des contraintes et des limites de rupture">
+
+        <div class="conclusion-box">
+            <h2>Conclusions du Projet</h2>
+            <p>L'analyse numérique rigoureuse de ces 4 machines antiques a permis de tirer une conclusion définitive :</p>
+            <ul style="color: rgba(255,255,255,0.9); margin-bottom: 0;">
+                <li style="margin-bottom: 10px;"><strong>Défaillance structurelle inévitable :</strong> Trois des modèles étudiés casseraient net avant même d'être pleinement armés.</li>
+                <li style="margin-bottom: 10px;"><strong>Déformations irréversibles :</strong> Le seul modèle capable d'encaisser la tension (le CMag Marsden) subit des déformations plastiques. Il s'endommagerait de façon permanente et deviendrait inutilisable dès le premier tir.</li>
+                <li><strong>Validation Historique :</strong> Les résultats corroborent la thèse de certains historiens : les textes de Biton décrivaient des armes conceptuelles non-fonctionnelles. Il s'agissait très probablement d'<strong>ingénierie de papier</strong> utilisée à des fins de <strong>propagande militaire</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="pdf-btn-container">
+            <a href="rapport_arcs.pdf" target="_blank" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i> Lire le rapport complet
+            </a>
+        </div>
+    </main>
+</body>
+</html>
