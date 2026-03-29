@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus Atlantic | Quentin Marinho</title>
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #f5f5f7; 
+            --text-main: hsl(240, 95%, 9%); 
+            --text-muted: #666666; 
+            --accent: #00205b; /* Bleu Airbus */
+        }
+        body { font-family: "Inter", sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 0; line-height: 1.6; }
+        .pixel-font { font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* HEADER PROJET */
+        .project-header { padding: 10vh 5vw 5vh; max-width: 1000px; margin: 0 auto; }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 3rem; transition: color 0.3s ease; }
+        .back-btn:hover { color: var(--text-main); }
+        .project-title { font-size: clamp(3rem, 8vw, 6rem); line-height: 1; font-weight: 800; margin: 0 0 1rem; text-transform: uppercase; letter-spacing: -0.04em; }
+        .project-subtitle { font-size: 1.5rem; color: var(--accent); font-weight: 500; margin-bottom: 2rem; }
+        
+        /* CONTENU */
+        .project-content { padding: 0 5vw 10vh; max-width: 1000px; margin: 0 auto; }
+        .intro-text { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 4rem; line-height: 1.5; }
+        .intro-text span { color: var(--text-main); font-weight: 800; }
+        
+        h2 { font-size: 2rem; font-weight: 800; text-transform: uppercase; margin: 4rem 0 1.5rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; }
+        p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+
+        /* REDUIRE LA TAILLE DES IMAGES DANS LES PROJETS */
+        .project-content img {
+            max-width: 65%;
+            height: auto;
+            display: block;
+            margin: 4rem auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* GRILLE DE MISSIONS */
+        .mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .mission-card { background: #fff; padding: 2.5rem; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-left: 4px solid var(--accent); }
+        .mission-card h3 { margin: 0 0 1rem 0; font-size: 1.2rem; color: var(--text-main); }
+        .mission-card p { font-size: 1rem; color: var(--text-muted); margin: 0; }
+        .mission-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; display: block; }
+
+        /* OUTILS */
+        .tools-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; }
+        .tool-tag { background: rgba(0, 32, 91, 0.1); color: var(--accent); padding: 8px 16px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .project-content img { max-width: 100%; } /* Repasse à 100% sur mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="project-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour au portfolio</a>
+        <div class="pixel-font" style="color: var(--text-muted); margin-bottom: 1rem;">Sept 2025 - Aujourd'hui</div>
+        <h1 class="project-title">Airbus Atlantic</h1>
+        <div class="project-subtitle">Apprenti Ingénieur Calcul Dynamique — Stelia Aerospace (R&T)</div>
+    </header>
+
+    <section class="project-content">
+        <p class="intro-text">
+            Intégré au bureau de <span>Recherche & Technologie (R&T)</span> au sein de la division Sièges de classe Affaires et Première (Stelia Aerospace), ma mission principale consiste à <span>modéliser, corréler et prédire le comportement dynamique</span> des futurs sièges d'avion avant leur certification, notamment pour les essais de crash réglementaires (normes dynamiques 14g et 16g).
+        </p>
+
+        <img src="images/siege-stelia.jpg" alt="Cabine et siège classe Affaires">
+
+        <h2>Mes Missions Principales</h2>
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <i class="fa-solid fa-cube"></i>
+                <h3>Caractérisation & Corrélation</h3>
+                <p>Récupération d'essais expérimentaux (écrasement de mousse par vérin en quasi-statique et dynamique) pour modélisation sous <strong>HyperMesh / Radioss</strong>. J'ai créé une <strong>méthodologie stricte</strong> pour la reproduction des futures caractérisations, permettant d'extraire des cartes matériaux fiables pour les modèles de sièges complets.</p>
+            </div>
+            
+            <div class="mission-card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Automatisation & Standardisation</h3>
+                <p>Étant le premier du bureau d'études à explorer l'automatisation, j'ai rédigé des <strong>guidelines complètes</strong> et développé des scripts (Tcl / HWC). J'ai également créé des <strong>templates de calculs dynamiques</strong> pour uniformiser les méthodologies et standardiser les rapports finaux de tous les futurs collaborateurs.</p>
+            </div>
+            
+            <div class="mission-card">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <h3>Planification d'Essais</h3>
+                <p>Élaboration du plan d'essais pour les futures campagnes expérimentales sur les ceintures de sécurité. L'objectif est de garantir que les données physiques récoltées permettront une corrélation optimale pour peaufiner notre modèle numérique prédictif.</p>
+            </div>
+        </div>
+
+        <h2>Projet d'Innovation : Positionnement de l'ATD</h2>
+        <p>Lors des simulations de crash, le positionnement du mannequin (ATD - Anthropomorphic Test Device) dans le modèle doit correspondre exactement à la réalité des essais physiques. Actuellement réalisée manuellement, cette tâche est chronophage et complexe.</p>
+        <p><strong>Ma solution en cours de développement :</strong> Création d'un outil d'automatisation exploitant un système de ressorts virtuels et une interface graphique. L'utilisateur y entre les coordonnées des points de référence issues des essais, et le modèle ajuste automatiquement la posture et la cinématique du mannequin sous HyperMesh.</p>
+
+        <img src="images/crash-atd.png" alt="Simulation comportement dynamique ATD lors d'un crash 16g">
+
+        <h2>Environnement Technique & Méthodologique</h2>
+        <div class="tools-list">
+            <span class="tool-tag">Altair HyperMesh</span>
+            <span class="tool-tag">Radioss</span>
+            <span class="tool-tag">HyperView / HyperGraph</span>
+            <span class="tool-tag">Scripting Tcl / Tk</span>
+            <span class="tool-tag">HWC (HyperWorks Command)</span>
+            <span class="tool-tag">Normes Crash (14g / 16g)</span>
+            <span class="tool-tag">Création de Guidelines</span>
+        </div>
+    </section>
+
+</body>
+</html>
